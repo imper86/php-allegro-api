@@ -30,6 +30,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\OfferQuantityChangeCommands;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers as SaleOffers;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferTags;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferVariants;
+use Imper86\PhpAllegroApi\Resource\Sale\ProductOffers;
 use Imper86\PhpAllegroApi\Resource\Sale\ProductProposals;
 use Imper86\PhpAllegroApi\Resource\Sale\Products;
 use Imper86\PhpAllegroApi\Resource\Sale\ShippingRates;
@@ -71,6 +72,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method DisputeAttachments disputeAttachments()
  * @method UserRatings userRatings()
  * @method BlacklistedUsers blacklistedUsers()
+ * @method ProductOffers productOffers()
  */
 class Sale extends AbstractResource
 {
