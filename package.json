@@ -1,0 +1,7 @@
+{
+  "prettier": {
+    "phpVersion": "7.1",
+    "printWidth": 100,
+    "singleQuote": true
+  }
+}

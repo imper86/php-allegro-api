@@ -21,6 +21,7 @@ use Imper86\PhpAllegroApi\Resource\Account;
 use Imper86\PhpAllegroApi\Resource\AfterSalesServiceConditions;
 use Imper86\PhpAllegroApi\Resource\Bidding;
 use Imper86\PhpAllegroApi\Resource\Billing;
+use Imper86\PhpAllegroApi\Resource\Charity;
 use Imper86\PhpAllegroApi\Resource\Me;
 use Imper86\PhpAllegroApi\Resource\Offers;
 use Imper86\PhpAllegroApi\Resource\Order;
@@ -41,6 +42,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method AfterSalesServiceConditions afterSalesServiceConditions()
  * @method Bidding bidding()
  * @method Billing billing()
+ * @method Charity charity()
  * @method Me me()
  * @method Offers offers()
  * @method Order order()
