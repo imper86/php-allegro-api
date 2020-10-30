@@ -11,6 +11,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\BlacklistedUsers;
 use Imper86\PhpAllegroApi\Resource\Sale\Categories;
 use Imper86\PhpAllegroApi\Resource\Sale\ClassifiedsPackages;
 use Imper86\PhpAllegroApi\Resource\Sale\CompatibilityList;
+use Imper86\PhpAllegroApi\Resource\Sale\CompatibilityListSuggestions;
 use Imper86\PhpAllegroApi\Resource\Sale\CompatibleProducts;
 use Imper86\PhpAllegroApi\Resource\Sale\DeliveryMethods;
 use Imper86\PhpAllegroApi\Resource\Sale\DeliverySettings;
@@ -48,6 +49,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method Products products()
  * @method ProductProposals productProposals()
  * @method CompatibilityList compatibilityList()
+ * @method CompatibilityListSuggestions compatibilityListSuggestions()
  * @method CompatibleProducts compatibleProducts()
  * @method OfferClassifiedsPackages offerClassifiedsPackages()
  * @method ClassifiedsPackages classifiedsPackages()
