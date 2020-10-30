@@ -24,6 +24,7 @@
     "require-dev": {
         "symfony/var-dumper": "^4.3",
         "php-http/guzzle6-adapter": "^2.0",
-        "http-interop/http-factory-guzzle": "^1.0"
+        "http-interop/http-factory-guzzle": "^1.0",
+        "imper86/vbump": "^1.0"
     }
 }

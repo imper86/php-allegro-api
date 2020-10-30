@@ -19,6 +19,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\DisputeAttachments;
 use Imper86\PhpAllegroApi\Resource\Sale\Disputes;
 use Imper86\PhpAllegroApi\Resource\Sale\Images;
 use Imper86\PhpAllegroApi\Resource\Sale\Loyalty;
+use Imper86\PhpAllegroApi\Resource\Sale\MatchingCategories;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferAdditionalServices;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferAttachments;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferClassifiedsPackages;
@@ -63,6 +64,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method OfferAdditionalServices offerAdditionalServices()
  * @method OfferVariants offerVariants()
  * @method Loyalty loyalty()
+ * @method MatchingCategories matchingCategories()
  * @method BadgeCampaigns badgeCampaigns()
  * @method Badges badges()
  * @method BadgeApplications badgeApplications()
