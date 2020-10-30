@@ -45,7 +45,6 @@ abstract class AbstractResource implements ResourceInterface
      */
     protected $reflection;
 
-
     public function __construct(AllegroApiInterface $client)
     {
         $this->client = $client;
@@ -67,8 +66,11 @@ abstract class AbstractResource implements ResourceInterface
         throw new InvalidArgumentException(sprintf('%s resource not found', $name));
     }
 
-    protected function apiGet(string $uri, ?array $query = null, ?string $contentType = null): ResponseInterface
-    {
+    protected function apiGet(
+        string $uri,
+        ?array $query = null,
+        ?string $contentType = null
+    ): ResponseInterface {
         $uri = $this->uriFactory->createUri($uri);
 
         if ($query) {
@@ -84,8 +86,11 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
-    protected function apiPost(string $uri, ?array $body = null, ?string $contentType = null): ResponseInterface
-    {
+    protected function apiPost(
+        string $uri,
+        ?array $body = null,
+        ?string $contentType = null
+    ): ResponseInterface {
         $request = $this->requestFactory->createRequest('POST', $uri);
 
         if ($body) {
@@ -100,8 +105,11 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
-    protected function apiPut(string $uri, ?array $body = null, ?string $contentType = null): ResponseInterface
-    {
+    protected function apiPut(
+        string $uri,
+        ?array $body = null,
+        ?string $contentType = null
+    ): ResponseInterface {
         $request = $this->requestFactory->createRequest('PUT', $uri);
 
         if ($body) {
@@ -116,8 +124,30 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
-    protected function apiDelete(string $uri, ?array $query = null, ?string $contentType = null): ResponseInterface
-    {
+    protected function apiPatch(
+        string $uri,
+        ?array $body = null,
+        ?string $contentType = null
+    ): ResponseInterface {
+        $request = $this->requestFactory->createRequest('PATCH', $uri);
+
+        if ($body) {
+            $stream = $this->streamFactory->createStream(json_encode($body));
+            $request = $request->withBody($stream);
+        }
+
+        if ($contentType) {
+            $request = $this->addContentHeaders($request, $contentType);
+        }
+
+        return $this->httpClient->sendRequest($request);
+    }
+
+    protected function apiDelete(
+        string $uri,
+        ?array $query = null,
+        ?string $contentType = null
+    ): ResponseInterface {
         $uri = $this->uriFactory->createUri($uri);
 
         if ($query) {
@@ -133,9 +163,12 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
-    private function addContentHeaders(RequestInterface $request, string $contentType): RequestInterface
-    {
-        return $request->withHeader('Content-Type', $contentType)
+    private function addContentHeaders(
+        RequestInterface $request,
+        string $contentType
+    ): RequestInterface {
+        return $request
+            ->withHeader('Content-Type', $contentType)
             ->withHeader('Accept', $contentType);
     }
 }
