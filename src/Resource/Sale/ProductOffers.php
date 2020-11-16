@@ -8,17 +8,18 @@ use Psr\Http\Message\ResponseInterface;
 
 class ProductOffers extends AbstractResource
 {
-    public function post(array $body): ResponseInterface
-    {
-        return $this->apiPost('/sale/product-offers', $body, ContentType::VND_BETA_V1);
+    public function post(
+        array $body,
+        string $contentType = ContentType::VND_BETA_V2
+    ): ResponseInterface {
+        return $this->apiPost('/sale/product-offers', $body, $contentType);
     }
 
-    public function patch(string $offerId, array $body): ResponseInterface
-    {
-        return $this->apiPatch(
-            sprintf('/sale/product-offers/%s', $offerId),
-            $body,
-            ContentType::VND_BETA_V1
-        );
+    public function patch(
+        string $offerId,
+        array $body,
+        string $contentType = ContentType::VND_BETA_V2
+    ): ResponseInterface {
+        return $this->apiPatch(sprintf('/sale/product-offers/%s', $offerId), $body, $contentType);
     }
 }
