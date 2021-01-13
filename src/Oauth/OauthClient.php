@@ -50,8 +50,11 @@ class OauthClient implements OauthClientInterface
         }
     }
 
-    public function getAuthorizationUri(bool $prompt = true, ?string $state = null): UriInterface
-    {
+    public function getAuthorizationUri(
+        bool $prompt = true,
+        ?string $state = null,
+        ?array $scope = null
+    ): UriInterface {
         $query = [
             'client_id' => $this->credentials->getClientId(),
             'redirect_uri' => $this->credentials->getRedirectUri(),
@@ -66,7 +69,13 @@ class OauthClient implements OauthClientInterface
             $query['prompt'] = 'confirm';
         }
 
-        $uri = $this->builder->getUriFactory()->createUri('/auth/oauth/authorize')
+        if ($scope) {
+            $query['scope'] = implode(' ', $scope);
+        }
+
+        $uri = $this->builder
+            ->getUriFactory()
+            ->createUri('/auth/oauth/authorize')
             ->withScheme('https')
             ->withHost(EndpointHost::OAUTH)
             ->withQuery(http_build_query($query));
@@ -124,15 +133,21 @@ class OauthClient implements OauthClientInterface
 
     private function generateRequest(array $query): RequestInterface
     {
-        $uri = $this->builder->getUriFactory()->createUri('/auth/oauth/token')
+        $uri = $this->builder
+            ->getUriFactory()
+            ->createUri('/auth/oauth/token')
             ->withQuery(http_build_query($query));
-        $auth = base64_encode(sprintf(
-            '%s:%s',
-            $this->credentials->getClientId(),
-            $this->credentials->getClientSecret()
-        ));
+        $auth = base64_encode(
+            sprintf(
+                '%s:%s',
+                $this->credentials->getClientId(),
+                $this->credentials->getClientSecret()
+            )
+        );
 
-        return $this->builder->getRequestFactory()->createRequest('POST', $uri)
+        return $this->builder
+            ->getRequestFactory()
+            ->createRequest('POST', $uri)
             ->withHeader('Content-Type', ContentType::X_WWW_FORM_URLENCODED)
             ->withHeader('Accept', ContentType::JSON)
             ->withHeader('Authorization', sprintf('Basic %s', $auth));

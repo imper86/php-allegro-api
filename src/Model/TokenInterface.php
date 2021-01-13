@@ -23,5 +23,7 @@ interface TokenInterface
 
     public function isExpired(?DateTimeInterface $now = null): bool;
 
+    public function getScope(): ?array;
+
     public function serialize(): array;
 }

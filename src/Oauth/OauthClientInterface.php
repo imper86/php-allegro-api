@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Imper86\PhpAllegroApi\Oauth;
-
 
 use Http\Client\Common\Plugin;
 use Imper86\PhpAllegroApi\Model\TokenInterface;
@@ -10,7 +8,11 @@ use Psr\Http\Message\UriInterface;
 
 interface OauthClientInterface
 {
-    public function getAuthorizationUri(bool $prompt = true, ?string $state = null): UriInterface;
+    public function getAuthorizationUri(
+        bool $prompt = true,
+        ?string $state = null,
+        ?array $scope = null
+    ): UriInterface;
 
     public function fetchTokenWithCode(string $code): TokenInterface;
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Imper86\PhpAllegroApi\Model;
-
 
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -19,6 +17,7 @@ class Token implements TokenInterface
         $resolver->setRequired(['access_token', 'grant_type', 'expiry']);
         $resolver->setDefault('refresh_token', null);
         $resolver->setDefault('user_id', null);
+        $resolver->setDefault('scope', null);
         $resolver->setAllowedTypes('access_token', 'string');
         $resolver->setAllowedTypes('grant_type', 'string');
         $resolver->setAllowedTypes('expiry', 'int');
@@ -65,6 +64,11 @@ class Token implements TokenInterface
         }
 
         return $now > $this->getExpiry();
+    }
+
+    public function getScope(): ?array
+    {
+        return $this->params['scope'] ? explode(' ', $this->params['scope']) : null;
     }
 
     public function serialize(): array

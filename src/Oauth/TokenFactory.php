@@ -22,6 +22,7 @@ class TokenFactory implements TokenFactoryInterface
             'grant_type' => $grantType,
             'expiry' => $parsed->getClaim('exp'),
             'user_id' => $parsed->hasClaim('user_name') ? $parsed->getClaim('user_name') : null,
+            'scope' => $body['scope'] ?? null,
         ]);
     }
 }
