@@ -10,7 +10,7 @@ class ProductOffers extends AbstractResource
 {
     public function post(
         array $body,
-        string $contentType = ContentType::VND_BETA_V2
+        string $contentType = ContentType::VND_PUBLIC_V1
     ): ResponseInterface {
         return $this->apiPost('/sale/product-offers', $body, $contentType);
     }
@@ -18,7 +18,7 @@ class ProductOffers extends AbstractResource
     public function patch(
         string $offerId,
         array $body,
-        string $contentType = ContentType::VND_BETA_V2
+        string $contentType = ContentType::VND_PUBLIC_V1
     ): ResponseInterface {
         return $this->apiPatch(sprintf('/sale/product-offers/%s', $offerId), $body, $contentType);
     }
