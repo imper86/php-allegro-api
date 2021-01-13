@@ -1,13 +1,12 @@
 <?php
 
-
 namespace Imper86\PhpAllegroApi\Resource\Sale;
-
 
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\Rating;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\ShippingRates as OffersShippingRates;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\Tags;
+use Imper86\PhpAllegroApi\Resource\Sale\Offers\UnfilledParameters;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -17,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
  * @method OffersShippingRates shippingRates()
  * @method Tags tags()
  * @method Rating rating()
+ * @method UnfilledParameters unfilledParameters()
  */
 class Offers extends AbstractResource
 {
