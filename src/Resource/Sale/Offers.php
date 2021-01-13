@@ -3,6 +3,9 @@
 namespace Imper86\PhpAllegroApi\Resource\Sale;
 
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
+use Imper86\PhpAllegroApi\Resource\Sale\Offers\PromoOptions;
+use Imper86\PhpAllegroApi\Resource\Sale\Offers\PromoOptionsCommands;
+use Imper86\PhpAllegroApi\Resource\Sale\Offers\PromoOptionsModification;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\Rating;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\ShippingRates as OffersShippingRates;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers\Tags;
@@ -13,6 +16,9 @@ use Psr\Http\Message\ResponseInterface;
  * Class Offers
  * @package Imper86\PhpAllegroApi\Resource\Sale
  *
+ * @method PromoOptions promoOptions()
+ * @method PromoOptionsCommands promoOptionsCommands()
+ * @method PromoOptionsModification promoOptionsModification()
  * @method OffersShippingRates shippingRates()
  * @method Tags tags()
  * @method Rating rating()
