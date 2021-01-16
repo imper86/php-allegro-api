@@ -1,14 +1,14 @@
 <?php
 
-
 namespace Imper86\PhpAllegroApi\Resource;
-
 
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeApplications;
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeCampaigns;
 use Imper86\PhpAllegroApi\Resource\Sale\Badges;
 use Imper86\PhpAllegroApi\Resource\Sale\BlacklistedUsers;
 use Imper86\PhpAllegroApi\Resource\Sale\Categories;
+use Imper86\PhpAllegroApi\Resource\Sale\CategoryEvents;
+use Imper86\PhpAllegroApi\Resource\Sale\CategoryParametersScheduledChanges;
 use Imper86\PhpAllegroApi\Resource\Sale\ClassifiedsPackages;
 use Imper86\PhpAllegroApi\Resource\Sale\CompatibilityList;
 use Imper86\PhpAllegroApi\Resource\Sale\CompatibilityListSuggestions;
@@ -45,6 +45,8 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @package Imper86\PhpAllegroApi\Resource
  *
  * @method Categories categories()
+ * @method CategoryEvents categoryEvents()
+ * @method CategoryParametersScheduledChanges categoryParametersScheduledChanges()
  * @method SaleOffers offers()
  * @method OfferEvents offerEvents()
  * @method OfferPublicationCommands offerPublicationCommands()
