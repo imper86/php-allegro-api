@@ -81,7 +81,7 @@ class OauthClient implements OauthClientInterface
             ->withQuery(http_build_query($query));
 
         if ($this->credentials->isSandbox()) {
-            $uri->withHost($uri->getHost() . EndpointHost::SANDBOX_SUFFIX);
+            $uri = $uri->withHost($uri->getHost() . EndpointHost::SANDBOX_SUFFIX);
         }
 
         return $uri;
