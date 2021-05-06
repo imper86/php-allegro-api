@@ -7,6 +7,18 @@ Just use composer:
 composer require imper86/php-allegro-api
 ```
 
+### HTTPlug note
+This lib uses [HTTPlug](https://github.com/php-http/httplug)
+so it doesn't depend on any http client. In order to use this
+lib you must have some [PSR-18 http client](https://www.php-fig.org/psr/psr-18)
+and [PSR-17 http factories](https://www.php-fig.org/psr/psr-17).
+If you don't know which one you shoud install you can require
+these:
+
+```sh
+composer require php-http/guzzle6-adapter http-interop/http-factory-guzzle
+```
+
 ## Authentication & usage
 Library has a bunch of mechanisms that allows you to forget about
 tokens, expirations etc. But in order to start using it you must
