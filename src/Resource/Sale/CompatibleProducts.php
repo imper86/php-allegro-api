@@ -6,6 +6,7 @@ namespace Imper86\PhpAllegroApi\Resource\Sale;
 
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
 use Imper86\PhpAllegroApi\Resource\Sale\CompatibleProducts\Groups;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -16,6 +17,12 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CompatibleProducts extends AbstractResource
 {
+    /**
+     * @param string[] $query
+     * @param string[]|null $headers
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     public function get(array $query, ?array $headers = null): ResponseInterface
     {
         $uri = $this->uriFactory->createUri('/sale/compatible-products')

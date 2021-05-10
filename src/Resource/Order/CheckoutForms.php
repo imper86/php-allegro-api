@@ -20,6 +20,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CheckoutForms extends AbstractResource
 {
+    /**
+     * @param string|null $id
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $id, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(sprintf('/order/checkout-forms%s', $id ? "/{$id}" : ''), $query);

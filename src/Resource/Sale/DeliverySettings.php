@@ -14,6 +14,10 @@ class DeliverySettings extends AbstractResource
         return $this->apiGet('/sale/delivery-settings');
     }
 
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(array $body): ResponseInterface
     {
         return $this->apiPut('/sale/delivery-settings', $body);

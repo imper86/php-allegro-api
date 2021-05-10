@@ -18,6 +18,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Categories extends AbstractResource
 {
+    /**
+     * @param string|null $categoryId
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $categoryId = null, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(sprintf('/sale/categories%s', $categoryId ? "/{$categoryId}" : ''), $query);

@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 class LineItemIdMappings extends AbstractResource
 {
     /**
-     * @param array $query
+     * @param string[] $query
      * @return ResponseInterface
      * @deprecated
      */

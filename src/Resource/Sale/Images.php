@@ -12,10 +12,20 @@ use Psr\Http\Message\StreamInterface;
 
 class Images extends AbstractResource
 {
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function postWithUrl(array $body): ResponseInterface
     {
+        $encodedBody = json_encode($body);
+
+        if (!$encodedBody) {
+            throw new \RuntimeException(json_last_error_msg(), json_last_error());
+        }
+
         return $this->postWithStream(
-            $this->streamFactory->createStream(json_encode($body)),
+            $this->streamFactory->createStream($encodedBody),
             ContentType::VND_PUBLIC_V1
         );
     }

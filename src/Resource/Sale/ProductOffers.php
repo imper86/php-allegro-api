@@ -12,6 +12,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ProductOffers extends AbstractResource
 {
+    /**
+     * @param mixed[] $body
+     * @param string $contentType
+     * @return ResponseInterface
+     */
     public function post(
         array $body,
         string $contentType = ContentType::VND_PUBLIC_V1
@@ -19,6 +24,12 @@ class ProductOffers extends AbstractResource
         return $this->apiPost('/sale/product-offers', $body, $contentType);
     }
 
+    /**
+     * @param string $offerId
+     * @param mixed[] $body
+     * @param string $contentType
+     * @return ResponseInterface
+     */
     public function patch(
         string $offerId,
         array $body,

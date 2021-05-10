@@ -7,6 +7,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class PickupDateProposals extends AbstractResource
 {
+    /**
+     * @param string[] $query
+     * @return ResponseInterface
+     */
     public function get(array $query): ResponseInterface
     {
         return $this->apiGet('/parcel-management/pickup-date-proposals', $query);

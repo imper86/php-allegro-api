@@ -26,16 +26,30 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Offers extends AbstractResource
 {
+    /**
+     * @param string|null $offerId
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $offerId = null, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(sprintf('/sale/offers%s', $offerId ? "/{$offerId}" : ''), $query);
     }
 
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(array $body): ResponseInterface
     {
         return $this->apiPost('/sale/offers', $body);
     }
 
+    /**
+     * @param string $offerId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(string $offerId, array $body): ResponseInterface
     {
         return $this->apiPut("/sale/offers/{$offerId}", $body);

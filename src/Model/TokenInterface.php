@@ -23,7 +23,13 @@ interface TokenInterface
 
     public function isExpired(?DateTimeInterface $now = null): bool;
 
+    /**
+     * @return string[]|null
+     */
     public function getScope(): ?array;
 
+    /**
+     * @return mixed[]
+     */
     public function serialize(): array;
 }

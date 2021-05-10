@@ -14,6 +14,11 @@ class Shipments extends AbstractResource
         return $this->apiGet("/order/checkout-forms/{$checkoutFormId}/shipments");
     }
 
+    /**
+     * @param string $checkoutFormId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(string $checkoutFormId, array $body): ResponseInterface
     {
         return $this->apiPost("/order/checkout-forms/{$checkoutFormId}/shipments", $body);

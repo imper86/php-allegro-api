@@ -19,6 +19,11 @@ class Invoices extends AbstractResource
         return $this->apiGet(sprintf('/order/checkout-forms/%s/invoices', $checkoutFormId));
     }
 
+    /**
+     * @param string $checkoutFormId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(string $checkoutFormId, array $body): ResponseInterface
     {
         return $this->apiPost(sprintf('/order/checkout-forms/%s/invoices', $checkoutFormId), $body);

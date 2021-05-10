@@ -8,8 +8,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Token implements TokenInterface
 {
-    private $params;
+    /**
+     * @var mixed[]
+     */
+    private array $params;
 
+    /**
+     * Token constructor.
+     * @param mixed[] $params
+     */
     public function __construct(array $params)
     {
         $resolver = new OptionsResolver();
@@ -66,6 +73,9 @@ class Token implements TokenInterface
         return $now > $this->getExpiry();
     }
 
+    /**
+     * @return string[]|null
+     */
     public function getScope(): ?array
     {
         return $this->params['scope'] ? explode(' ', $this->params['scope']) : null;

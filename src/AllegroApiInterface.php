@@ -79,7 +79,7 @@ interface AllegroApiInterface
 
     /**
      * @param CacheItemPoolInterface $cacheItemPool
-     * @param array $config
+     * @param mixed[] $config
      */
     public function addCache(CacheItemPoolInterface $cacheItemPool, array $config = []): void;
 

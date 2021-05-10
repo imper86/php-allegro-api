@@ -10,6 +10,11 @@ use Psr\Http\Message\ResponseInterface;
 
 class BadgeApplications extends AbstractResource
 {
+    /**
+     * @param string|null $applicationId
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $applicationId, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(

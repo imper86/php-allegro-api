@@ -10,6 +10,10 @@ use Psr\Http\Message\StreamInterface;
 
 class OfferAttachments extends AbstractResource
 {
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(array $body): ResponseInterface
     {
         return $this->apiPost('/sale/offer-attachments', $body);

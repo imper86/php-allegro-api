@@ -9,41 +9,25 @@
 namespace Imper86\PhpAllegroApi\Resource;
 
 use Imper86\PhpAllegroApi\AllegroApiInterface;
-use InvalidArgumentException;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use ReflectionClass;
 
 abstract class AbstractResource implements ResourceInterface
 {
+    protected AllegroApiInterface $client;
+    protected RequestFactoryInterface $requestFactory;
+    protected UriFactoryInterface $uriFactory;
+    protected HttpClientInterface $httpClient;
+    protected StreamFactoryInterface $streamFactory;
     /**
-     * @var AllegroApiInterface
+     * @var \ReflectionClass<static>
      */
-    protected $client;
-    /**
-     * @var RequestFactoryInterface
-     */
-    protected $requestFactory;
-    /**
-     * @var UriFactoryInterface
-     */
-    protected $uriFactory;
-    /**
-     * @var HttpClientInterface
-     */
-    protected $httpClient;
-    /**
-     * @var StreamFactoryInterface
-     */
-    protected $streamFactory;
-    /**
-     * @var ReflectionClass
-     */
-    protected $reflection;
+    protected \ReflectionClass $reflection;
 
     public function __construct(AllegroApiInterface $client)
     {
@@ -52,10 +36,16 @@ abstract class AbstractResource implements ResourceInterface
         $this->uriFactory = $client->getBuilder()->getUriFactory();
         $this->streamFactory = $client->getBuilder()->getStreamFactory();
         $this->httpClient = $client->getBuilder()->getHttpClient();
-        $this->reflection = new ReflectionClass($this);
+        $this->reflection = new \ReflectionClass($this);
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     * @return ResourceInterface
+     * @throws \InvalidArgumentException
+     */
+    public function __call(string $name, array $arguments): ResourceInterface
     {
         $className = $this->reflection->getName() . '\\' . ucfirst($name);
 
@@ -63,9 +53,16 @@ abstract class AbstractResource implements ResourceInterface
             return new $className($this->client);
         }
 
-        throw new InvalidArgumentException(sprintf('%s resource not found', $name));
+        throw new \InvalidArgumentException(sprintf('%s resource not found', $name));
     }
 
+    /**
+     * @param string $uri
+     * @param string[]|null $query
+     * @param string|null $contentType
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     protected function apiGet(
         string $uri,
         ?array $query = null,
@@ -86,15 +83,27 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
+    /**
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     protected function apiPost(
         string $uri,
         ?array $body = null,
         ?string $contentType = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('POST', $uri);
+        $encodedBody = json_encode($body);
+
+        if (!$encodedBody) {
+            throw new \RuntimeException(json_last_error_msg(), json_last_error());
+        }
 
         if ($body) {
-            $stream = $this->streamFactory->createStream(json_encode($body));
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -105,15 +114,27 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
+    /**
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     protected function apiPut(
         string $uri,
         ?array $body = null,
         ?string $contentType = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('PUT', $uri);
+        $encodedBody = json_encode($body);
+
+        if (!$encodedBody) {
+            throw new \RuntimeException(json_last_error_msg(), json_last_error());
+        }
 
         if ($body) {
-            $stream = $this->streamFactory->createStream(json_encode($body));
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -124,15 +145,27 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
+    /**
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     protected function apiPatch(
         string $uri,
         ?array $body = null,
         ?string $contentType = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('PATCH', $uri);
+        $encodedBody = json_encode($body);
+
+        if (!$encodedBody) {
+            throw new \RuntimeException(json_last_error_msg(), json_last_error());
+        }
 
         if ($body) {
-            $stream = $this->streamFactory->createStream(json_encode($body));
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -143,6 +176,13 @@ abstract class AbstractResource implements ResourceInterface
         return $this->httpClient->sendRequest($request);
     }
 
+    /**
+     * @param string $uri
+     * @param string[]|null $query
+     * @param string|null $contentType
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     protected function apiDelete(
         string $uri,
         ?array $query = null,

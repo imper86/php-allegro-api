@@ -14,6 +14,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class PromoOptionsCommands extends AbstractResource
 {
+    /**
+     * @param string $commandId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(string $commandId, array $body): ResponseInterface
     {
         return $this->apiPut(sprintf('/sale/offers/promo-options-commands/%s', $commandId), $body);

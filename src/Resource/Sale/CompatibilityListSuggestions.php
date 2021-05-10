@@ -7,6 +7,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class CompatibilityListSuggestions extends AbstractResource
 {
+    /**
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?array $query): ResponseInterface
     {
         return $this->apiGet(

@@ -9,14 +9,8 @@ use Imper86\PhpAllegroApi\Model\TokenInterface;
 
 class FileTokenRepository implements TokenRepositoryInterface
 {
-    /**
-     * @var string
-     */
-    private $identifier;
-    /**
-     * @var string
-     */
-    private $workDir;
+    private string $identifier;
+    private string $workDir;
 
     public function __construct(string $identifier, string $workDir)
     {
@@ -30,9 +24,18 @@ class FileTokenRepository implements TokenRepositoryInterface
             return null;
         }
 
-        $raw = json_decode(file_get_contents($this->getPath()), true);
+        $raw = file_get_contents($this->getPath());
+        $json = $raw ? json_decode($raw, true) : null;
 
-        return new Token($raw);
+        if (!$json) {
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \RuntimeException(json_last_error_msg(), json_last_error());
+            }
+
+            throw new \RuntimeException('Couldn\'t fetch token from file');
+        }
+
+        return new Token($json);
     }
 
     public function save(TokenInterface $token): void

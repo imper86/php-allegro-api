@@ -9,6 +9,11 @@ use Psr\Http\Message\ResponseInterface;
 
 class Bid extends AbstractResource
 {
+    /**
+     * @param string $offerId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(string $offerId, array $body): ResponseInterface
     {
         return $this->apiPut("/bidding/offers/{$offerId}/bid", $body);

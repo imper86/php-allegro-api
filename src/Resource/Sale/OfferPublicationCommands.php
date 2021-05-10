@@ -16,6 +16,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class OfferPublicationCommands extends AbstractResource
 {
+    /**
+     * @param string $commandId
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(string $commandId, array $body): ResponseInterface
     {
         return $this->apiPut("/sale/offer-publication-commands/{$commandId}", $body);

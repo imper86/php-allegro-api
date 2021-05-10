@@ -18,6 +18,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class UserRatings extends AbstractResource
 {
+    /**
+     * @param string[] $query
+     * @return ResponseInterface
+     */
     public function get(array $query): ResponseInterface
     {
         return $this->apiGet('/sale/user-ratings', $query);

@@ -15,14 +15,8 @@ use RuntimeException;
 
 class AuthenticationPlugin implements Plugin
 {
-    /**
-     * @var TokenRepositoryInterface
-     */
-    private $tokenRepository;
-    /**
-     * @var OauthClientInterface
-     */
-    private $oauthClient;
+    private TokenRepositoryInterface $tokenRepository;
+    private OauthClientInterface $oauthClient;
 
     public function __construct(TokenRepositoryInterface $tokenRepository, OauthClientInterface $oauthClient)
     {
@@ -48,8 +42,10 @@ class AuthenticationPlugin implements Plugin
 
     private function handleExpired(TokenInterface $token): TokenInterface
     {
-        if ($token->getRefreshToken()) {
-            return $this->oauthClient->fetchTokenWithRefreshToken($token->getRefreshToken());
+        $refreshToken = $token->getRefreshToken();
+
+        if ($refreshToken) {
+            return $this->oauthClient->fetchTokenWithRefreshToken($refreshToken);
         }
 
         if (GrantType::CLIENT_CREDENTIALS === $token->getGrantType()) {

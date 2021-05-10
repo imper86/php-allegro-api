@@ -7,6 +7,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Label extends AbstractResource
 {
+    /**
+     * @param string[] $query
+     * @return ResponseInterface
+     */
     public function get(array $query): ResponseInterface
     {
         return $this->apiGet('/parcel-management/parcels/label', $query);

@@ -8,6 +8,12 @@ use Psr\Http\Message\UriInterface;
 
 interface OauthClientInterface
 {
+    /**
+     * @param bool $prompt
+     * @param string|null $state
+     * @param string[]|null $scope
+     * @return UriInterface
+     */
     public function getAuthorizationUri(
         bool $prompt = true,
         ?string $state = null,

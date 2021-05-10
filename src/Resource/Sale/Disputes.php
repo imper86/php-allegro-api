@@ -16,6 +16,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Disputes extends AbstractResource
 {
+    /**
+     * @param string|null $disputeId
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $disputeId, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(sprintf('/sale/disputes%s', $disputeId ? "/{$disputeId}" : ''), $query);

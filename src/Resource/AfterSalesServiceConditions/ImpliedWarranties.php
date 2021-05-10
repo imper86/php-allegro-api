@@ -9,6 +9,11 @@ use Psr\Http\Message\ResponseInterface;
 
 class ImpliedWarranties extends AbstractResource
 {
+    /**
+     * @param string[]|null $query
+     * @param string|null $id
+     * @return ResponseInterface
+     */
     public function get(?array $query, ?string $id = null): ResponseInterface
     {
         return $this->apiGet(
@@ -17,11 +22,20 @@ class ImpliedWarranties extends AbstractResource
         );
     }
 
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(array $body): ResponseInterface
     {
         return $this->apiPost('/after-sales-service-conditions/implied-warranties', $body);
     }
 
+    /**
+     * @param string $id
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function put(string $id, array $body): ResponseInterface
     {
         return $this->apiPut("/after-sales-service-conditions/implied-warranties/{$id}", $body);

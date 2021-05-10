@@ -9,6 +9,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class Groups extends AbstractResource
 {
+    /**
+     * @param string[] $query
+     * @param string[]|null $headers
+     * @return ResponseInterface
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     public function get(array $query, ?array $headers = null): ResponseInterface
     {
         $uri = $this->uriFactory->createUri('/sale/compatible-products/groups')

@@ -81,7 +81,12 @@ class AllegroApi implements AllegroApiInterface
         }
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     * @return ResourceInterface
+     */
+    public function __call(string $name, array $arguments): ResourceInterface
     {
         return $this->api($name);
     }

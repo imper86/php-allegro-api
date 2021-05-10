@@ -24,18 +24,9 @@ use Psr\Http\Message\UriInterface;
 
 class OauthClient implements OauthClientInterface
 {
-    /**
-     * @var CredentialsInterface
-     */
-    private $credentials;
-    /**
-     * @var BuilderInterface
-     */
-    private $builder;
-    /**
-     * @var TokenFactoryInterface
-     */
-    private $tokenFactory;
+    private CredentialsInterface $credentials;
+    private BuilderInterface $builder;
+    private TokenFactoryInterface $tokenFactory;
 
     public function __construct(CredentialsInterface $credentials)
     {
@@ -50,6 +41,12 @@ class OauthClient implements OauthClientInterface
         }
     }
 
+    /**
+     * @param bool $prompt
+     * @param string|null $state
+     * @param string[]|null $scope
+     * @return UriInterface
+     */
     public function getAuthorizationUri(
         bool $prompt = true,
         ?string $state = null,
@@ -131,6 +128,10 @@ class OauthClient implements OauthClientInterface
         $this->builder->removePlugin($fqcn);
     }
 
+    /**
+     * @param string[] $query
+     * @return RequestInterface
+     */
     private function generateRequest(array $query): RequestInterface
     {
         $uri = $this->builder

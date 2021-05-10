@@ -14,6 +14,10 @@ class AdditionalEmails extends AbstractResource
         return $this->apiGet(sprintf('/account/additional-emails%s', $emailId ? "/{$emailId}" : ''));
     }
 
+    /**
+     * @param mixed[] $body
+     * @return ResponseInterface
+     */
     public function post(array $body): ResponseInterface
     {
         return $this->apiPost('/account/additional-emails', $body);

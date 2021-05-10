@@ -8,6 +8,11 @@ use Psr\Http\Message\ResponseInterface;
 
 class FundraisingCampaigns extends AbstractResource
 {
+    /**
+     * @param string|null $id
+     * @param string[]|null $query
+     * @return ResponseInterface
+     */
     public function get(?string $id = null, ?array $query = null): ResponseInterface
     {
         return $this->apiGet(
