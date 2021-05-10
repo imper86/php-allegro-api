@@ -62,6 +62,7 @@ $tokenRepository = new FileTokenRepository(
     $token->getUserId(), 
     __DIR__ . '/tokens'
 );
+$tokenRepository->save($token);
 
 /*
  * You can invent your own TokenRepository, just implement
