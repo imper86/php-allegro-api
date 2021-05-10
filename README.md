@@ -1,5 +1,9 @@
 # Allegro.pl REST API PHP SDK
 
+## Deprecated
+
+This version (v1.x.x) won't be maintained. Please upgrade to V2.
+
 ## Installation
 
 Just use composer:
