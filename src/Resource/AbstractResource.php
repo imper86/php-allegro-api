@@ -58,7 +58,7 @@ abstract class AbstractResource implements ResourceInterface
 
     /**
      * @param string $uri
-     * @param string[]|null $query
+     * @param mixed[]|null $query
      * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
@@ -71,7 +71,9 @@ abstract class AbstractResource implements ResourceInterface
         $uri = $this->uriFactory->createUri($uri);
 
         if ($query) {
-            $uri = $uri->withQuery(http_build_query($query));
+            $uri = $uri->withQuery(
+                preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', http_build_query($query))
+            );
         }
 
         $request = $this->requestFactory->createRequest('GET', $uri);
