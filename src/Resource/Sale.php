@@ -38,6 +38,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\ProductProposals;
 use Imper86\PhpAllegroApi\Resource\Sale\Products;
 use Imper86\PhpAllegroApi\Resource\Sale\ShippingRates;
 use Imper86\PhpAllegroApi\Resource\Sale\SizeTables;
+use Imper86\PhpAllegroApi\Resource\Sale\TaxSettings;
 use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
 
 /**
@@ -81,6 +82,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method UserRatings userRatings()
  * @method BlacklistedUsers blacklistedUsers()
  * @method ProductOffers productOffers()
+ * @method TaxSettings taxSettings()
  */
 class Sale extends AbstractResource
 {
