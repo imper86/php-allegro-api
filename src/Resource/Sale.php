@@ -2,6 +2,9 @@
 
 namespace Imper86\PhpAllegroApi\Resource;
 
+use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesAccountConsent;
+use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesAccountEligibility;
+use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesOfferConsents;
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeApplications;
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeCampaigns;
 use Imper86\PhpAllegroApi\Resource\Sale\Badges;
@@ -45,6 +48,9 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * Class Sale
  * @package Imper86\PhpAllegroApi\Resource
  *
+ * @method AllegroPricesAccountConsent allegroPricesAccountConsent()
+ * @method AllegroPricesAccountEligibility allegroPricesAccountEligibility()
+ * @method AllegroPricesOfferConsents allegroPricesOfferConsents()
  * @method Categories categories()
  * @method CategoryEvents categoryEvents()
  * @method CategoryParametersScheduledChanges categoryParametersScheduledChanges()

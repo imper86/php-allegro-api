@@ -70,10 +70,15 @@ abstract class AbstractResource implements ResourceInterface
     ): ResponseInterface {
         $uri = $this->uriFactory->createUri($uri);
 
-        if ($query) {
-            $uri = $uri->withQuery(
-                preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', http_build_query($query))
-            );
+        if (
+            $query &&
+            ($queryString = preg_replace(
+                '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/',
+                '=',
+                http_build_query($query)
+            ))
+        ) {
+            $uri = $uri->withQuery($queryString);
         }
 
         $request = $this->requestFactory->createRequest('GET', $uri);
