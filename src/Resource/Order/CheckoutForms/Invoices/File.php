@@ -18,10 +18,12 @@ class File extends AbstractResource
      */
     public function put(string $checkoutFormId, string $invoiceId, $body): ResponseInterface
     {
-        $request = $this->requestFactory->createRequest(
-            'PUT',
-            sprintf('/order/checkout-forms/%s/invoices/%s', $checkoutFormId, $invoiceId)
-        );
+        $request = $this->requestFactory
+            ->createRequest(
+                'PUT',
+                sprintf('/order/checkout-forms/%s/invoices/%s', $checkoutFormId, $invoiceId)
+            )
+            ->withHeader('Content-Type', 'application/pdf');
 
         if ($body instanceof StreamInterface) {
             $request->withBody($body);
