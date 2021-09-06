@@ -18,7 +18,7 @@ class AcceptLanguagePlugin implements Plugin
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         if (!$request->hasHeader('Accept-Language')) {
-            $request = $request->withHeader('Accept-Langueage', $this->locale);
+            $request = $request->withHeader('Accept-Language', $this->locale);
         }
 
         return $next($request);
