@@ -38,12 +38,12 @@ class ProductOffers extends AbstractResource
         return $this->apiPatch(sprintf('/sale/product-offers/%s', $offerId), $body, $contentType);
     }
 
-    public function get(string $offerId): ResponseInterface
+    public function get(string $offerId, string $contentType = ContentType::VND_PUBLIC_V2): ResponseInterface
     {
         return $this->apiGet(
             sprintf('/sale/product-offers/%s', $offerId),
             null,
-            ContentType::VND_PUBLIC_V2
+            $contentType
         );
     }
 }
