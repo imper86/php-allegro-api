@@ -42,6 +42,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\ProductProposals;
 use Imper86\PhpAllegroApi\Resource\Sale\Products;
 use Imper86\PhpAllegroApi\Resource\Sale\ShippingRates;
 use Imper86\PhpAllegroApi\Resource\Sale\SizeTables;
+use Imper86\PhpAllegroApi\Resource\Sale\SizeTablesTemplates;
 use Imper86\PhpAllegroApi\Resource\Sale\TaxSettings;
 use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
 
@@ -76,6 +77,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method OfferPromotionPackages offerPromotionPackages()
  * @method OfferQuantityChangeCommands offerQuantityChangeCommands()
  * @method SizeTables sizeTables()
+ * @method SizeTablesTemplates sizeTablesTemplates()
  * @method OfferContacts offerContacts()
  * @method OfferAdditionalServices offerAdditionalServices()
  * @method OfferVariants offerVariants()
