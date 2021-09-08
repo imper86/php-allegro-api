@@ -23,6 +23,7 @@ use Imper86\PhpAllegroApi\Resource\Bidding;
 use Imper86\PhpAllegroApi\Resource\Billing;
 use Imper86\PhpAllegroApi\Resource\Charity;
 use Imper86\PhpAllegroApi\Resource\Me;
+use Imper86\PhpAllegroApi\Resource\Messaging;
 use Imper86\PhpAllegroApi\Resource\Offers;
 use Imper86\PhpAllegroApi\Resource\Order;
 use Imper86\PhpAllegroApi\Resource\ParcelManagement;
@@ -45,6 +46,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Billing billing()
  * @method Charity charity()
  * @method Me me()
+ * @method Messaging messaging()
  * @method Offers offers()
  * @method Order order()
  * @method ParcelManagement parcelManagement()
