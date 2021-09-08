@@ -6,8 +6,12 @@ namespace Imper86\PhpAllegroApi\Resource\Sale;
 
 use Imper86\PhpAllegroApi\Enum\ContentType;
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
+use Imper86\PhpAllegroApi\Resource\Sale\Badges\Offers as BadgesOffers;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @method BadgesOffers offers()
+ */
 class Badges extends AbstractResource
 {
     /**

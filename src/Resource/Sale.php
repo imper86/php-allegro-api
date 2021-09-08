@@ -7,6 +7,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesAccountEligibility;
 use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesOfferConsents;
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeApplications;
 use Imper86\PhpAllegroApi\Resource\Sale\BadgeCampaigns;
+use Imper86\PhpAllegroApi\Resource\Sale\BadgeOperations;
 use Imper86\PhpAllegroApi\Resource\Sale\Badges;
 use Imper86\PhpAllegroApi\Resource\Sale\BlacklistedUsers;
 use Imper86\PhpAllegroApi\Resource\Sale\Categories;
@@ -51,6 +52,10 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method AllegroPricesAccountConsent allegroPricesAccountConsent()
  * @method AllegroPricesAccountEligibility allegroPricesAccountEligibility()
  * @method AllegroPricesOfferConsents allegroPricesOfferConsents()
+ * @method BadgeApplications badgeApplications()
+ * @method BadgeCampaigns badgeCampaigns()
+ * @method BadgeOperations badgeOperations()
+ * @method Badges badges()
  * @method Categories categories()
  * @method CategoryEvents categoryEvents()
  * @method CategoryParametersScheduledChanges categoryParametersScheduledChanges()
@@ -76,9 +81,6 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method OfferVariants offerVariants()
  * @method Loyalty loyalty()
  * @method MatchingCategories matchingCategories()
- * @method BadgeCampaigns badgeCampaigns()
- * @method Badges badges()
- * @method BadgeApplications badgeApplications()
  * @method ShippingRates shippingRates()
  * @method DeliverySettings deliverySettings()
  * @method DeliveryMethods deliveryMethods()
