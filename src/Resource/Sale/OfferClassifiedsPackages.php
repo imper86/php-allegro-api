@@ -21,6 +21,6 @@ class OfferClassifiedsPackages extends AbstractResource
      */
     public function put(string $offerId, array $body): ResponseInterface
     {
-        return $this->apiPost("/sale/offer-classifieds-packages/{$offerId}", $body);
+        return $this->apiPut("/sale/offer-classifieds-packages/{$offerId}", $body);
     }
 }
