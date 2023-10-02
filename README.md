@@ -109,5 +109,54 @@ If you use IDE with typehinting such as PHPStorm, you'll easily
 figure it out. If not, please 
 [take a look in Resource directory](src/Resource)
 
+## Device Flow
+
+```php
+use Imper86\PhpAllegroApi\AllegroApi;
+use Imper86\PhpAllegroApi\Model\Credentials;
+use Imper86\PhpAllegroApi\Oauth\FileTokenRepository;
+use Imper86\PhpAllegroApi\Plugin\AuthenticationPlugin;
+
+// first, create Credentials object
+$credentials = new Credentials(
+    'your-client-id',
+    'your-client-secret',
+    'your-redirect-uri',
+    true //is sandbox
+);
+
+// create api client
+$api = new AllegroApi($credentials);
+
+// Create authorization session
+$session = $api->oauth()->getDeviceCode();
+
+// Provide device code and/or url to user
+echo 'Please visit: ' . $session->getVerificationUriComplete();
+
+// Poll for authorization result
+$interval = $session->getInterval();
+$token = false;
+do {
+    sleep($interval);
+    $device_code = $session->getDeviceCode();
+    try{
+        $token = $api->oauth()->fetchTokenWithDeviceCode($device_code);
+    } catch (AuthorizationPendingException) {
+        continue;
+    } catch (SlowDownException) {
+        $interval++;
+        continue;
+    }
+} while ($token == false);
+
+// create TokenRepository object
+$tokenRepository = new FileTokenRepository(
+    $token->getUserId(), 
+    __DIR__ . '/tokens'
+);
+$tokenRepository->save($token);
+```
+
 ## Contributing
 Any help will be very appreciated :)

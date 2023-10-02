@@ -8,6 +8,7 @@
 
 namespace Imper86\PhpAllegroApi\Oauth;
 
+use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Common\Plugin;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Imper86\HttpClientBuilder\Builder;
@@ -15,10 +16,15 @@ use Imper86\HttpClientBuilder\BuilderInterface;
 use Imper86\PhpAllegroApi\Enum\ContentType;
 use Imper86\PhpAllegroApi\Enum\EndpointHost;
 use Imper86\PhpAllegroApi\Enum\GrantType;
+use Imper86\PhpAllegroApi\Exceptions\AccessDeniedException;
+use Imper86\PhpAllegroApi\Exceptions\AuthorizationPendingException;
+use Imper86\PhpAllegroApi\Exceptions\SlowDownException;
 use Imper86\PhpAllegroApi\Model\CredentialsInterface;
+use Imper86\PhpAllegroApi\Model\DeviceFlowAuthSession;
 use Imper86\PhpAllegroApi\Model\TokenInterface;
 use Imper86\PhpAllegroApi\Plugin\OauthUriPlugin;
 use Imper86\PhpAllegroApi\Plugin\SandboxUriPlugin;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -84,6 +90,50 @@ class OauthClient implements OauthClientInterface
         return $uri;
     }
 
+    public function getDeviceCode(
+        ?array $scope = null
+    ): DeviceFlowAuthSession {
+        $query = [
+            'client_id' => $this->credentials->getClientId(),
+        ];
+
+        if ($scope) {
+            $query['scope'] = implode(' ', $scope);
+        }
+
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/device'));
+        $body = json_decode($response->getBody()->__toString(), true);
+
+        return new DeviceFlowAuthSession($body['device_code'], $body['expires_in'], $body['user_code'], $body['interval'], $body['verification_uri'], $body['verification_uri_complete']);
+    }
+
+    public function fetchTokenWithDeviceCode(string $code): TokenInterface
+    {
+        $query = [
+            'grant_type' => GrantType::DEVICE_CODE,
+            'device_code' => $code,
+        ];
+
+        try {
+            $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
+        } catch (ClientErrorException $clientErrorException) {
+            $response = $clientErrorException->getResponse();
+            $body = json_decode($response->getBody()->__toString(), true);
+
+            if ($body['error'] == 'slow_down') {
+                throw new SlowDownException($body['error_description'], 0, $clientErrorException);
+            } elseif ($body['error'] == 'authorization_pending') {
+                throw new AuthorizationPendingException($body['error_description'], 0, $clientErrorException);
+            } elseif ($body['error'] == 'access_denied') {
+                throw new AccessDeniedException($body['error_description'], 0, $clientErrorException);
+            } else {
+                throw $clientErrorException;
+            }
+        }
+
+        return $this->tokenFactory->createFromResponse($response, GrantType::DEVICE_CODE);
+    }
+
     public function fetchTokenWithCode(string $code): TokenInterface
     {
         $query = [
@@ -92,7 +142,7 @@ class OauthClient implements OauthClientInterface
             'redirect_uri' => $this->credentials->getRedirectUri(),
         ];
 
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query));
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::AUTHORIZATION_CODE);
     }
@@ -105,7 +155,7 @@ class OauthClient implements OauthClientInterface
             'redirect_uri' => $this->credentials->getRedirectUri(),
         ];
 
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query));
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::REFRESH_TOKEN);
     }
@@ -113,7 +163,7 @@ class OauthClient implements OauthClientInterface
     public function fetchTokenWithClientCredentials(): TokenInterface
     {
         $query = ['grant_type' => GrantType::CLIENT_CREDENTIALS];
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query));
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::CLIENT_CREDENTIALS);
     }
@@ -130,13 +180,14 @@ class OauthClient implements OauthClientInterface
 
     /**
      * @param string[] $query
+     * @param string $path
      * @return RequestInterface
      */
-    private function generateRequest(array $query): RequestInterface
+    private function generateRequest(array $query, string $path): RequestInterface
     {
         $uri = $this->builder
             ->getUriFactory()
-            ->createUri('/auth/oauth/token')
+            ->createUri($path)
             ->withQuery(http_build_query($query));
         $auth = base64_encode(
             sprintf(
