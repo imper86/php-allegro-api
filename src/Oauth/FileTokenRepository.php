@@ -16,6 +16,10 @@ class FileTokenRepository implements TokenRepositoryInterface
     {
         $this->identifier = $identifier;
         $this->workDir = $workDir;
+
+        if (!is_dir($this->workDir)) {
+            mkdir($this->workDir, 0755, true);
+        }
     }
 
     public function load(): ?TokenInterface
