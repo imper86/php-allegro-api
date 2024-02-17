@@ -100,7 +100,8 @@ abstract class AbstractResource implements ResourceInterface
     protected function apiPost(
         string $uri,
         ?array $body = null,
-        ?string $contentType = null
+        ?string $contentType = null,
+        ?string $accept = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('POST', $uri);
         $encodedBody = json_encode($body);
@@ -116,6 +117,10 @@ abstract class AbstractResource implements ResourceInterface
 
         if ($contentType) {
             $request = $this->addContentHeaders($request, $contentType);
+        }
+
+        if ($accept) {
+            $request = $this->addAcceptHeaders($request, $accept);
         }
 
         return $this->httpClient->sendRequest($request);
@@ -162,7 +167,8 @@ abstract class AbstractResource implements ResourceInterface
     protected function apiPatch(
         string $uri,
         ?array $body = null,
-        ?string $contentType = null
+        ?string $contentType = null,
+
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('PATCH', $uri);
         $encodedBody = json_encode($body);
@@ -218,4 +224,13 @@ abstract class AbstractResource implements ResourceInterface
             ->withHeader('Content-Type', $contentType)
             ->withHeader('Accept', $contentType);
     }
+
+    private function addAcceptHeaders(
+        RequestInterface $request,
+        string $accept
+    ): RequestInterface {
+        return $request
+            ->withHeader('Accept', $accept);
+    }
+
 }
