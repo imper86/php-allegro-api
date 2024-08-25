@@ -167,8 +167,7 @@ abstract class AbstractResource implements ResourceInterface
     protected function apiPatch(
         string $uri,
         ?array $body = null,
-        ?string $contentType = null,
-
+        ?string $contentType = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('PATCH', $uri);
         $encodedBody = json_encode($body);
