@@ -21,7 +21,7 @@ class File extends AbstractResource
         $request = $this->requestFactory
             ->createRequest(
                 'PUT',
-                sprintf('/order/checkout-forms/%s/invoices/%s', $checkoutFormId, $invoiceId)
+                sprintf('/order/checkout-forms/%s/invoices/%s/file', $checkoutFormId, $invoiceId)
             )
             ->withHeader('Content-Type', 'application/pdf');
 
@@ -30,7 +30,8 @@ class File extends AbstractResource
         } elseif (is_resource($body)) {
             $request->withBody($this->streamFactory->createStreamFromResource($body));
         } elseif (is_string($body)) {
-            $request->withBody($this->streamFactory->createStream($body));
+            $stream = $this->streamFactory->createStream($body);
+            $request = $request->withBody($stream);
         } else {
             throw new \InvalidArgumentException(
                 sprintf('Body must be instance of %s or resource or string', StreamInterface::class)
