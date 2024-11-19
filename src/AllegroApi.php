@@ -32,6 +32,7 @@ use Imper86\PhpAllegroApi\Resource\PointsOfService;
 use Imper86\PhpAllegroApi\Resource\Pricing;
 use Imper86\PhpAllegroApi\Resource\ResourceInterface;
 use Imper86\PhpAllegroApi\Resource\Sale;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement;
 use Imper86\PhpAllegroApi\Resource\Users;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
@@ -50,6 +51,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Offers offers()
  * @method Order order()
  * @method ParcelManagement parcelManagement()
+ * @method ShipmentManagement shipmentManagement()
  * @method Payments payments()
  * @method PointsOfService pointsOfService()
  * @method Pricing pricing()
