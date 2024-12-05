@@ -40,6 +40,8 @@ use Imper86\PhpAllegroApi\Resource\Sale\OfferVariants;
 use Imper86\PhpAllegroApi\Resource\Sale\ProductOffers;
 use Imper86\PhpAllegroApi\Resource\Sale\ProductProposals;
 use Imper86\PhpAllegroApi\Resource\Sale\Products;
+use Imper86\PhpAllegroApi\Resource\Sale\ResponsiblePersons;
+use Imper86\PhpAllegroApi\Resource\Sale\ResponsibleProducers;
 use Imper86\PhpAllegroApi\Resource\Sale\ShippingRates;
 use Imper86\PhpAllegroApi\Resource\Sale\SizeTables;
 use Imper86\PhpAllegroApi\Resource\Sale\SizeTablesTemplates;
@@ -83,6 +85,8 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method OfferVariants offerVariants()
  * @method Loyalty loyalty()
  * @method MatchingCategories matchingCategories()
+ * @method ResponsiblePersons responsiblePersons()
+ * @method ResponsibleProducers responsibleProducers()
  * @method ShippingRates shippingRates()
  * @method DeliverySettings deliverySettings()
  * @method DeliveryMethods deliveryMethods()
