@@ -20,6 +20,11 @@ class Label extends AbstractResource
      */
     public function post(array $body): ResponseInterface
     {
-        return $this->apiPost('/shipment-management/label', $body,ContentType::VND_PUBLIC_V1, ContentType::OCTET_STREAM);
+        return $this->apiPost(
+            '/shipment-management/label',
+            $body,
+            ContentType::VND_PUBLIC_V1,
+            ContentType::OCTET_STREAM,
+        );
     }
 }

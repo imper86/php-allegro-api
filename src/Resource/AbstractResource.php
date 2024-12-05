@@ -19,11 +19,11 @@ use Psr\Http\Message\UriFactoryInterface;
 
 abstract class AbstractResource implements ResourceInterface
 {
-    protected AllegroApiInterface     $client;
+    protected AllegroApiInterface $client;
     protected RequestFactoryInterface $requestFactory;
-    protected UriFactoryInterface     $uriFactory;
-    protected HttpClientInterface     $httpClient;
-    protected StreamFactoryInterface  $streamFactory;
+    protected UriFactoryInterface $uriFactory;
+    protected HttpClientInterface $httpClient;
+    protected StreamFactoryInterface $streamFactory;
     /**
      * @var \ReflectionClass<static>
      */
@@ -31,23 +31,23 @@ abstract class AbstractResource implements ResourceInterface
 
     public function __construct(AllegroApiInterface $client)
     {
-        $this->client         = $client;
+        $this->client = $client;
         $this->requestFactory = $client->getBuilder()->getRequestFactory();
-        $this->uriFactory     = $client->getBuilder()->getUriFactory();
-        $this->streamFactory  = $client->getBuilder()->getStreamFactory();
-        $this->httpClient     = $client->getBuilder()->getHttpClient();
-        $this->reflection     = new \ReflectionClass($this);
+        $this->uriFactory = $client->getBuilder()->getUriFactory();
+        $this->streamFactory = $client->getBuilder()->getStreamFactory();
+        $this->httpClient = $client->getBuilder()->getHttpClient();
+        $this->reflection = new \ReflectionClass($this);
     }
 
     /**
-     * @param  string  $name
-     * @param  mixed[]  $arguments
+     * @param string $name
+     * @param mixed[] $arguments
      * @return ResourceInterface
      * @throws \InvalidArgumentException
      */
     public function __call(string $name, array $arguments): ResourceInterface
     {
-        $className = $this->reflection->getName().'\\'.ucfirst($name);
+        $className = $this->reflection->getName() . '\\' . ucfirst($name);
 
         if (class_exists($className) && is_a($className, ResourceInterface::class, true)) {
             return new $className($this->client);
@@ -57,9 +57,9 @@ abstract class AbstractResource implements ResourceInterface
     }
 
     /**
-     * @param  string  $uri
-     * @param  mixed[]|null  $query
-     * @param  string|null  $contentType
+     * @param string $uri
+     * @param mixed[]|null $query
+     * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
@@ -91,9 +91,9 @@ abstract class AbstractResource implements ResourceInterface
     }
 
     /**
-     * @param  string  $uri
-     * @param  mixed[]|null  $body
-     * @param  string|null  $contentType
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
@@ -103,7 +103,7 @@ abstract class AbstractResource implements ResourceInterface
         ?string $contentType = null,
         ?string $accept = null
     ): ResponseInterface {
-        $request     = $this->requestFactory->createRequest('POST', $uri);
+        $request = $this->requestFactory->createRequest('POST', $uri);
         $encodedBody = json_encode($body);
 
         if (!$encodedBody) {
@@ -111,7 +111,7 @@ abstract class AbstractResource implements ResourceInterface
         }
 
         if ($body) {
-            $stream  = $this->streamFactory->createStream($encodedBody);
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -127,9 +127,9 @@ abstract class AbstractResource implements ResourceInterface
     }
 
     /**
-     * @param  string  $uri
-     * @param  mixed[]|null  $body
-     * @param  string|null  $contentType
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
@@ -138,7 +138,7 @@ abstract class AbstractResource implements ResourceInterface
         ?array $body = null,
         ?string $contentType = null
     ): ResponseInterface {
-        $request     = $this->requestFactory->createRequest('PUT', $uri);
+        $request = $this->requestFactory->createRequest('PUT', $uri);
         $encodedBody = json_encode($body);
 
         if (!$encodedBody) {
@@ -146,7 +146,7 @@ abstract class AbstractResource implements ResourceInterface
         }
 
         if ($body) {
-            $stream  = $this->streamFactory->createStream($encodedBody);
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -158,9 +158,9 @@ abstract class AbstractResource implements ResourceInterface
     }
 
     /**
-     * @param  string  $uri
-     * @param  mixed[]|null  $body
-     * @param  string|null  $contentType
+     * @param string $uri
+     * @param mixed[]|null $body
+     * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
@@ -169,7 +169,7 @@ abstract class AbstractResource implements ResourceInterface
         ?array $body = null,
         ?string $contentType = null
     ): ResponseInterface {
-        $request     = $this->requestFactory->createRequest('PATCH', $uri);
+        $request = $this->requestFactory->createRequest('PATCH', $uri);
         $encodedBody = json_encode($body);
 
         if (!$encodedBody) {
@@ -177,7 +177,7 @@ abstract class AbstractResource implements ResourceInterface
         }
 
         if ($body) {
-            $stream  = $this->streamFactory->createStream($encodedBody);
+            $stream = $this->streamFactory->createStream($encodedBody);
             $request = $request->withBody($stream);
         }
 
@@ -189,9 +189,9 @@ abstract class AbstractResource implements ResourceInterface
     }
 
     /**
-     * @param  string  $uri
-     * @param  string[]|null  $query
-     * @param  string|null  $contentType
+     * @param string $uri
+     * @param string[]|null $query
+     * @param string|null $contentType
      * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
