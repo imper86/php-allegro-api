@@ -20,9 +20,9 @@ use Imper86\PhpAllegroApi\Resource\ShipmentManagement\PickupProposals;
  * @method ShipmentCreateCommands shipmentCreateCommands()
  * @method ShipmentCancelCommands shipmentCancelCommands()
  * @method PickupCreateCommands pickupCreateCommands()
- * @method Shipment shipments()
- * @method Label labels()
- * @method Protocol protocols()
+ * @method Shipment shipment()
+ * @method Label label()
+ * @method Protocol protocol()
  * @method PickupProposals pickupProposals()
  *
  */

@@ -75,7 +75,7 @@ abstract class AbstractResource implements ResourceInterface
             ($queryString = preg_replace(
                 '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/',
                 '=',
-                http_build_query($query)
+                http_build_query($query),
             ))
         ) {
             $uri = $uri->withQuery($queryString);
@@ -100,7 +100,8 @@ abstract class AbstractResource implements ResourceInterface
     protected function apiPost(
         string $uri,
         ?array $body = null,
-        ?string $contentType = null
+        ?string $contentType = null,
+        ?string $accept = null
     ): ResponseInterface {
         $request = $this->requestFactory->createRequest('POST', $uri);
         $encodedBody = json_encode($body);
@@ -116,6 +117,10 @@ abstract class AbstractResource implements ResourceInterface
 
         if ($contentType) {
             $request = $this->addContentHeaders($request, $contentType);
+        }
+
+        if ($accept) {
+            $request = $this->addAcceptHeaders($request, $accept);
         }
 
         return $this->httpClient->sendRequest($request);
@@ -217,5 +222,13 @@ abstract class AbstractResource implements ResourceInterface
         return $request
             ->withHeader('Content-Type', $contentType)
             ->withHeader('Accept', $contentType);
+    }
+
+    private function addAcceptHeaders(
+        RequestInterface $request,
+        string $acceptType
+    ): RequestInterface {
+        return $request
+            ->withHeader('Accept', $acceptType);
     }
 }
