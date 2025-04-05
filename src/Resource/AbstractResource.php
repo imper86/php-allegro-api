@@ -231,5 +231,4 @@ abstract class AbstractResource implements ResourceInterface
         return $request
             ->withHeader('Accept', $acceptType);
     }
-
 }
