@@ -105,8 +105,8 @@ $api->users()->(...);
 var_dump($api->sale()->offers()->tags()->get('123456'));
 ```
 
-If you use IDE with typehinting such as PHPStorm, you'll easily
-figure it out. If not, please
+If you use IDE with typehinting such as PHPStorm, you'll easily 
+figure it out. If not, please 
 [take a look in Resource directory](src/Resource)
 
 ## Device Flow
