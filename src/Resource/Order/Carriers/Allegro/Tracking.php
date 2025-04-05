@@ -18,8 +18,8 @@ class Tracking extends AbstractResource
     {
         return $this->apiGet(
             '/order/carriers/ALLEGRO/tracking',
-            ['waybill' => $waybills],
-            ContentType::VND_PUBLIC_V1
+            ['waybills' => $waybills],
+            ContentType::VND_BETA_V1
         );
     }
 }

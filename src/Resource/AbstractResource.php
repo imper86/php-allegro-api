@@ -75,7 +75,7 @@ abstract class AbstractResource implements ResourceInterface
             ($queryString = preg_replace(
                 '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/',
                 '=',
-                http_build_query($query)
+                http_build_query($query),
             ))
         ) {
             $uri = $uri->withQuery($queryString);
@@ -226,10 +226,10 @@ abstract class AbstractResource implements ResourceInterface
 
     private function addAcceptHeaders(
         RequestInterface $request,
-        string $accept
+        string $acceptType
     ): RequestInterface {
         return $request
-            ->withHeader('Accept', $accept);
+            ->withHeader('Accept', $acceptType);
     }
 
 }

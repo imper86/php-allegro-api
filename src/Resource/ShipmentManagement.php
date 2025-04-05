@@ -2,21 +2,29 @@
 
 namespace Imper86\PhpAllegroApi\Resource;
 
-use Imper86\PhpAllegroApi\Resource\ShipmentManagement\CancelCommands;
+
+
 use Imper86\PhpAllegroApi\Resource\ShipmentManagement\DeliveryServices;
-use Imper86\PhpAllegroApi\Resource\ShipmentManagement\CreateCommands;
 use Imper86\PhpAllegroApi\Resource\ShipmentManagement\Label;
-use Imper86\PhpAllegroApi\Resource\ShipmentManagement\Shipments;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\Protocol;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\Shipment;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\ShipmentCancelCommands;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\ShipmentCreateCommands;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\PickupCreateCommands;
+use Imper86\PhpAllegroApi\Resource\ShipmentManagement\PickupProposals;
 
 /**
  * Class ShipmentManagement
- * @package Imper86\PhpAllegroApi\Resource
  *
  * @method DeliveryServices deliveryServices()
- * @method CreateCommands createCommands()
- * @method Shipments shipments()
+ * @method ShipmentCreateCommands shipmentCreateCommands()
+ * @method ShipmentCancelCommands shipmentCancelCommands()
+ * @method PickupCreateCommands pickupCreateCommands()
+ * @method Shipment shipment()
  * @method Label label()
- * @method CancelCommands cancelCommands()
+ * @method Protocol protocol()
+ * @method PickupProposals pickupProposals()
+ *
  */
 class ShipmentManagement extends AbstractResource {
 
