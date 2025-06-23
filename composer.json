@@ -13,8 +13,7 @@
         "php": ">=7.4",
         "ext-json": "*",
         "lcobucci/jwt": "^4.0",
-        "imper86/php-http-cache-plugin": "^2.0",
-        "imper86/http-client-builder": "^2.0"
+        "imper86/http-client-builder": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -27,5 +26,10 @@
         "http-interop/http-factory-guzzle": "^1.0",
         "imper86/vbump": "^1.0",
         "phpstan/phpstan": "^0.12.86"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
     }
 }

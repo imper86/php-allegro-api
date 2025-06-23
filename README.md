@@ -1,6 +1,6 @@
 # Allegro.pl REST API PHP SDK
 
-## Upgrading v1.x.x -> v2.x.x
+## Upgrading v1.x.x -> v2.x.x -> v3.x.x
 
 V2 introduced PHP >=7.4 support (8.0 is also supported).
 All you need to do is change version in ```composer.json```
