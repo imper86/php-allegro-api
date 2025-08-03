@@ -7,17 +7,17 @@ use Imper86\PhpAllegroApi\Resource\AbstractResource;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 
+use function sprintf;
+
 class Tracking extends AbstractResource
 {
     /**
-     * @param string[] $waybills
-     * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
-    public function get(array $waybills): ResponseInterface
+    public function get(array $waybills, string $carrier = 'ALLEGRO'): ResponseInterface
     {
         return $this->apiGet(
-            '/order/carriers/ALLEGRO/tracking',
+            sprintf('/order/carriers/%s/tracking', $carrier),
             ['waybill' => $waybills],
             ContentType::VND_PUBLIC_V1
         );
