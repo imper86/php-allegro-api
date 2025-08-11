@@ -28,6 +28,8 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
+use function http_build_query;
+
 class OauthClient implements OauthClientInterface
 {
     private CredentialsInterface $credentials;
@@ -109,13 +111,13 @@ class OauthClient implements OauthClientInterface
 
     public function fetchTokenWithDeviceCode(string $code): TokenInterface
     {
-        $query = [
+        $body = [
             'grant_type' => GrantType::DEVICE_CODE,
             'device_code' => $code,
         ];
 
         try {
-            $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
+            $response = $this->builder->getHttpClient()->sendRequest($this->generateRequestWithBody($body, '/auth/oauth/token'));
         } catch (ClientErrorException $clientErrorException) {
             $response = $clientErrorException->getResponse();
             $body = json_decode($response->getBody()->__toString(), true);
@@ -136,34 +138,34 @@ class OauthClient implements OauthClientInterface
 
     public function fetchTokenWithCode(string $code): TokenInterface
     {
-        $query = [
+        $body = [
             'grant_type' => GrantType::AUTHORIZATION_CODE,
             'code' => $code,
             'redirect_uri' => $this->credentials->getRedirectUri(),
         ];
 
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequestWithBody($body, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::AUTHORIZATION_CODE);
     }
 
     public function fetchTokenWithRefreshToken(string $refreshToken): TokenInterface
     {
-        $query = [
+        $body = [
             'grant_type' => GrantType::REFRESH_TOKEN,
             'refresh_token' => $refreshToken,
             'redirect_uri' => $this->credentials->getRedirectUri(),
         ];
 
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequestWithBody($body, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::REFRESH_TOKEN);
     }
 
     public function fetchTokenWithClientCredentials(): TokenInterface
     {
-        $query = ['grant_type' => GrantType::CLIENT_CREDENTIALS];
-        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequest($query, '/auth/oauth/token'));
+        $body = ['grant_type' => GrantType::CLIENT_CREDENTIALS];
+        $response = $this->builder->getHttpClient()->sendRequest($this->generateRequestWithBody($body, '/auth/oauth/token'));
 
         return $this->tokenFactory->createFromResponse($response, GrantType::CLIENT_CREDENTIALS);
     }
@@ -200,6 +202,36 @@ class OauthClient implements OauthClientInterface
         return $this->builder
             ->getRequestFactory()
             ->createRequest('POST', $uri)
+            ->withHeader('Content-Type', ContentType::X_WWW_FORM_URLENCODED)
+            ->withHeader('Accept', ContentType::JSON)
+            ->withHeader('Authorization', sprintf('Basic %s', $auth));
+    }
+
+    /**
+     * @param string[] $body
+     * @param string $path
+     * @return RequestInterface
+     */
+    private function generateRequestWithBody(array $body, string $path): RequestInterface
+    {
+        $uri = $this->builder
+            ->getUriFactory()
+            ->createUri($path);
+        $auth = base64_encode(
+            sprintf(
+                '%s:%s',
+                $this->credentials->getClientId(),
+                $this->credentials->getClientSecret()
+            )
+        );
+        $stream = $this->builder
+            ->getStreamFactory()
+            ->createStream(http_build_query($body));
+
+        return $this->builder
+            ->getRequestFactory()
+            ->createRequest('POST', $uri)
+            ->withBody($stream)
             ->withHeader('Content-Type', ContentType::X_WWW_FORM_URLENCODED)
             ->withHeader('Accept', ContentType::JSON)
             ->withHeader('Authorization', sprintf('Basic %s', $auth));
