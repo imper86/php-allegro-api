@@ -28,6 +28,8 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
+use function http_build_query;
+
 class OauthClient implements OauthClientInterface
 {
     private CredentialsInterface $credentials;
@@ -224,13 +226,13 @@ class OauthClient implements OauthClientInterface
         );
         $stream = $this->builder
             ->getStreamFactory()
-            ->createStream(json_encode($body));
+            ->createStream(http_build_query($body));
 
         return $this->builder
             ->getRequestFactory()
             ->createRequest('POST', $uri)
             ->withBody($stream)
-            ->withHeader('Content-Type', ContentType::JSON)
+            ->withHeader('Content-Type', ContentType::X_WWW_FORM_URLENCODED)
             ->withHeader('Accept', ContentType::JSON)
             ->withHeader('Authorization', sprintf('Basic %s', $auth));
     }
