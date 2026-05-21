@@ -6,7 +6,8 @@ namespace Imper86\PhpAllegroApi\Oauth;
 
 use Imper86\PhpAllegroApi\Model\Token;
 use Imper86\PhpAllegroApi\Model\TokenInterface;
-use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Encoding\JoseEncoder;
+use Lcobucci\JWT\Token\Parser;
 use Lcobucci\JWT\Token\Plain;
 use Psr\Http\Message\ResponseInterface;
 
@@ -15,9 +16,9 @@ class TokenFactory implements TokenFactoryInterface
     public function createFromResponse(ResponseInterface $response, string $grantType): TokenInterface
     {
         $body = json_decode($response->getBody()->__toString(), true);
-        $jwtConfig = Configuration::forUnsecuredSigner();
+        $jwtParser = new Parser(new JoseEncoder());
 
-        $parsed = $jwtConfig->parser()->parse($body['access_token']);
+        $parsed = $jwtParser->parse($body['access_token']);
 
         if (!$parsed instanceof Plain) {
             throw new \RuntimeException('Could not parse token');
