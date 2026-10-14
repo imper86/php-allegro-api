@@ -23,6 +23,7 @@ class Invoices extends AbstractResource
      * @param string $checkoutFormId
      * @param mixed[] $body
      * @return ResponseInterface
+     * @deprecated Allegro deprecated this endpoint. Use order()->billingDocuments()->files()->post() instead.
      */
     public function post(string $checkoutFormId, array $body): ResponseInterface
     {

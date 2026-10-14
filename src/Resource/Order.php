@@ -4,6 +4,7 @@
 namespace Imper86\PhpAllegroApi\Resource;
 
 
+use Imper86\PhpAllegroApi\Resource\Order\BillingDocuments;
 use Imper86\PhpAllegroApi\Resource\Order\Carriers;
 use Imper86\PhpAllegroApi\Resource\Order\CheckoutForms;
 use Imper86\PhpAllegroApi\Resource\Order\CustomerReturns;
@@ -18,6 +19,7 @@ use Imper86\PhpAllegroApi\Resource\Order\RefundClaims;
  *
  * @method Events events()
  * @method EventStats eventStats()
+ * @method BillingDocuments billingDocuments()
  * @method CheckoutForms checkoutForms()
  * @method CustomerReturns customerReturns()
  * @method LineItemIdMappings lineItemIdMappings()
