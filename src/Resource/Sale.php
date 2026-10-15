@@ -31,6 +31,7 @@ use Imper86\PhpAllegroApi\Resource\Sale\OfferClassifiedsPackages;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferContacts;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferEvents;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferModificationCommands;
+use Imper86\PhpAllegroApi\Resource\Sale\OfferPriceAutomationCommands;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferPriceChangeCommands;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferPromotionPackages;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferPublicationCommands;
@@ -38,6 +39,8 @@ use Imper86\PhpAllegroApi\Resource\Sale\OfferQuantityChangeCommands;
 use Imper86\PhpAllegroApi\Resource\Sale\Offers as SaleOffers;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferTags;
 use Imper86\PhpAllegroApi\Resource\Sale\OfferVariants;
+use Imper86\PhpAllegroApi\Resource\Sale\PriceAutomationOfferRules;
+use Imper86\PhpAllegroApi\Resource\Sale\PriceAutomationRules;
 use Imper86\PhpAllegroApi\Resource\Sale\ProductOffers;
 use Imper86\PhpAllegroApi\Resource\Sale\ProductProposals;
 use Imper86\PhpAllegroApi\Resource\Sale\Products;
@@ -77,9 +80,12 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method Issues issues()
  * @method OfferAttachments offerAttachments()
  * @method OfferModificationCommands offerModificationCommands()
+ * @method OfferPriceAutomationCommands offerPriceAutomationCommands()
  * @method OfferPriceChangeCommands offerPriceChangeCommands()
  * @method OfferPromotionPackages offerPromotionPackages()
  * @method OfferQuantityChangeCommands offerQuantityChangeCommands()
+ * @method PriceAutomationOfferRules priceAutomationOfferRules()
+ * @method PriceAutomationRules priceAutomationRules()
  * @method SizeTables sizeTables()
  * @method SizeTablesTemplates sizeTablesTemplates()
  * @method OfferContacts offerContacts()
