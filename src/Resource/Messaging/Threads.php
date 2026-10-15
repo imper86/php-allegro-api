@@ -2,6 +2,7 @@
 
 namespace Imper86\PhpAllegroApi\Resource\Messaging;
 
+use Imper86\PhpAllegroApi\Enum\ContentType;
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
 use Imper86\PhpAllegroApi\Resource\Messaging\Threads\Messages as ThreadsMessages;
 use Imper86\PhpAllegroApi\Resource\Messaging\Threads\Read;
@@ -17,7 +18,8 @@ class Threads extends AbstractResource
     {
         return $this->apiGet(
             sprintf('/messaging/threads%s', $threadId ? '/' . $threadId : ''),
-            $query
+            $query,
+            ContentType::VND_BETA_V1
         );
     }
 }

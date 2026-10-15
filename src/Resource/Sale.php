@@ -93,8 +93,8 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @method DeliverySettings deliverySettings()
  * @method DeliveryMethods deliveryMethods()
  * @method OfferTags offerTags()
- * @method Disputes disputes()
- * @method DisputeAttachments disputeAttachments()
+ * @method Disputes disputes() Deprecated. Allegro removed /sale/disputes on 2026-01-07. Use issues().
+ * @method DisputeAttachments disputeAttachments() Deprecated. Allegro removed /sale/dispute-attachments on 2026-01-07. Use issues()->attachments().
  * @method UserRatings userRatings()
  * @method BlacklistedUsers blacklistedUsers()
  * @method ProductOffers productOffers()
