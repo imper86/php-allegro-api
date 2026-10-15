@@ -2,6 +2,7 @@
 
 namespace Imper86\PhpAllegroApi\Resource\Messaging;
 
+use Imper86\PhpAllegroApi\Enum\ContentType;
 use Imper86\PhpAllegroApi\Resource\AbstractResource;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -10,7 +11,7 @@ class MessageAttachments extends AbstractResource
 {
     public function post(array $body): ResponseInterface
     {
-        return $this->apiPost('/messaging/message-attachments', $body);
+        return $this->apiPost('/messaging/message-attachments', $body, ContentType::VND_BETA_V1);
     }
 
     public function put(string $attachmentId, string $contentType, StreamInterface $body): ResponseInterface
@@ -18,6 +19,7 @@ class MessageAttachments extends AbstractResource
         $uri = $this->uriFactory->createUri(sprintf('/messaging/message-attachments/%s', $attachmentId));
         $request = $this->requestFactory->createRequest('PUT', $uri)
             ->withHeader('Content-Type', $contentType)
+            ->withHeader('Accept', ContentType::VND_BETA_V1)
             ->withBody($body);
 
         return $this->httpClient->sendRequest($request);
