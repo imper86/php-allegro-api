@@ -15,6 +15,7 @@ class File extends AbstractResource
      * @param StreamInterface|resource|string $body
      * @return ResponseInterface
      * @throws ClientExceptionInterface
+     * @deprecated Allegro deprecated this endpoint. Use order()->billingDocuments()->files()->post() instead.
      */
     public function put(string $checkoutFormId, string $invoiceId, $body): ResponseInterface
     {
