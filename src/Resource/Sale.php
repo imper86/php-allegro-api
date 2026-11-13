@@ -3,6 +3,7 @@
 namespace Imper86\PhpAllegroApi\Resource;
 
 use Imper86\PhpAllegroApi\Resource\Sale\AlleDiscount;
+use Imper86\PhpAllegroApi\Resource\Sale\AllegroPrices;
 use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesAccountConsent;
 use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesAccountEligibility;
 use Imper86\PhpAllegroApi\Resource\Sale\AllegroPricesOfferConsents;
@@ -58,9 +59,10 @@ use Imper86\PhpAllegroApi\Resource\Sale\UserRatings;
  * @package Imper86\PhpAllegroApi\Resource
  *
  * @method AlleDiscount alleDiscount()
- * @method AllegroPricesAccountConsent allegroPricesAccountConsent()
- * @method AllegroPricesAccountEligibility allegroPricesAccountEligibility()
- * @method AllegroPricesOfferConsents allegroPricesOfferConsents()
+ * @method AllegroPrices allegroPrices()
+ * @method AllegroPricesAccountConsent allegroPricesAccountConsent() Deprecated. Allegro removed /sale/allegro-prices-account-consent on 2026-05-25. Use allegroPrices()->accounts()->participations()->patch().
+ * @method AllegroPricesAccountEligibility allegroPricesAccountEligibility() Deprecated. Allegro removed /sale/allegro-prices-account-eligibility on 2026-05-25. Use allegroPrices()->accounts()->participations()->get().
+ * @method AllegroPricesOfferConsents allegroPricesOfferConsents() Deprecated. Allegro removed /sale/allegro-prices-offer-consents on 2026-05-25. Use allegroPrices()->offers()->submitOfferCommands(), exclusionCommands(), and offersQueries().
  * @method BadgeApplications badgeApplications()
  * @method BadgeCampaigns badgeCampaigns()
  * @method BadgeOperations badgeOperations()
